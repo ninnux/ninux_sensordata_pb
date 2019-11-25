@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package tutorial;
+package ninux;
 
 message entry {
   required string key = 1;
@@ -12,7 +12,7 @@ message myset {
   repeated entry entries = 2;
 }
 
-message array {
+message sensordata {
   repeated myset sets = 1;
 }
 

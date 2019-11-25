@@ -1,14 +1,14 @@
-#include "array.pb-c.h"
+#include "sensordata.pb-c.h"
 
 
-int myarray_init(Tutorial__Array *array);
-int myarray_add_set(Tutorial__Array *array, Tutorial__Myset *set, int timestamp);
-int myarray_add_entry(Tutorial__Array *array, Tutorial__Myset *set, char* key, int value);
+int sensordata_init(Ninux__Sensordata *Sensordata);
+int sensordata_add_set(Ninux__Sensordata *Sensordata, Ninux__Myset *set, int timestamp);
+int sensordata_add_entry(Ninux__Sensordata *Sensordata, Ninux__Myset *set, char* key, int value);
 
-int impacchetto(Tutorial__Array *array);
+int sensordata_pack(Ninux__Sensordata *Sensordata);
 
-int serialize(Tutorial__Array *array, uint8_t **buf);
-//int deserialize(Tutorial__Array *array, uint8_t *buf);
-int dealloco(Tutorial__Array *array);
+int sensordata_serialize(Ninux__Sensordata *Sensordata, uint8_t **buf);
+//int deserialize(Ninux__Sensordata *Sensordata, uint8_t *buf);
+int sensordata_free(Ninux__Sensordata *Sensordata);
 
-int print_all(Tutorial__Array *array);
+int sensordata_print_all(Ninux__Sensordata *Sensordata);
