@@ -1,7 +1,8 @@
-#esp-idf component for managing ninuxsensors data by protocolbuf
+##esp-idf component for managing ninuxsensors data by protocolbuf
 
-##example
+###example
 
+```
 #include "ninux_sensordata_pb.h"
 
 int test4(){
@@ -43,3 +44,4 @@ int test4(){
   sensordata_free(&sensordata);
   return 0;
 }
+```
