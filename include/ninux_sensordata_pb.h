@@ -8,6 +8,7 @@ int sensordata_add_entry(Ninux__Sensordata *Sensordata, Ninux__Myset *set, char*
 int sensordata_pack(Ninux__Sensordata *Sensordata);
 
 int sensordata_serialize(Ninux__Sensordata *Sensordata,unsigned char **buf);
+int sensordata_serialize2(Ninux__Sensordata *Sensordata,unsigned char **buf);
 int sensordata_deserialize(Ninux__Sensordata **Sensordata, unsigned char *buf);
 int sensordata_free(Ninux__Sensordata *Sensordata);
 
