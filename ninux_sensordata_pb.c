@@ -90,7 +90,7 @@ int sensordata_deserialize(Ninux__Sensordata **sensordata, uint8_t *buf){
 }
 
 int sensordata_deserialize2_size(Ninux__Sensordata **sensordata, uint8_t *buf, int* size){
-  sensordata = ninux__sensordata__unpack(NULL,*size,(uint8_t *)buf);
+  *sensordata = ninux__sensordata__unpack(NULL,*size,(uint8_t *)buf);
   return 0;
 }
 
