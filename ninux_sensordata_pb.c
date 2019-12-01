@@ -127,6 +127,14 @@ int sensordata_print_all(Ninux__Sensordata *Sensordata){
 }
 
 
+int sensordata_print_all2(unsigned char** buffer,int* size){
+  Ninux__Sensordata *sensordata2;
+  sensordata2=malloc(sizeof(Ninux__Sensordata));
+  Ninux__Sensordata **psensordata2 = &sensordata2;
+  sensordata_deserialize2_size(psensordata2, buffer,size);
+  sensordata_print_all(sensordata2);
+  return 0;
+}
 
 int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys,int* values, int len, int* size){
 
@@ -145,7 +153,7 @@ int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys
   for(i=0; i<len;i++){
   	sensordata_add_entry(sensordata2,set3,keys[i],values[i]);
   }
-  sensordata_print_all(sensordata2);
+  //sensordata_print_all(sensordata2);
   printf("size buf:%d\n",*size);
   sensordata_serialize2_size(sensordata2, buffer,size);
   /////////////
