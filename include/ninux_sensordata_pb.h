@@ -15,3 +15,4 @@ int sensordata_deserialize2_size(Ninux__Sensordata **sensordata, uint8_t *buf, i
 int sensordata_free(Ninux__Sensordata *Sensordata);
 
 int sensordata_print_all(Ninux__Sensordata *Sensordata);
+int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys,int* values, int len, int* size);
