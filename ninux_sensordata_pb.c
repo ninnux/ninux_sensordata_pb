@@ -4,12 +4,21 @@
 #include "ninux_sensordata_pb.h"
 
 
+
 int sensordata_init(Ninux__Sensordata *Sensordata){
   //inizializza Sensordata con set vuoto
   Ninux__Myset **sets;
   sets=malloc(sizeof (Ninux__Myset *));
   Sensordata->n_sets = 0;
   Sensordata->sets=sets;
+  return 0;
+}
+
+int sensordata_init2(unsigned char** buffer, int* buffer_len){
+  Ninux__Sensordata sensordata = NINUX__SENSORDATA__INIT;
+  sensordata_init(&sensordata);
+  //char* buffer;
+  sensordata_serialize2_size(&sensordata,buffer,buffer_len);
   return 0;
 }
 

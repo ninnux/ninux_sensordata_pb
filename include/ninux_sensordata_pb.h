@@ -2,6 +2,7 @@
 
 
 int sensordata_init(Ninux__Sensordata *Sensordata);
+int sensordata_init2(unsigned char** buffer, int* buffer_len);
 int sensordata_add_set(Ninux__Sensordata *Sensordata, Ninux__Myset *set, int timestamp);
 int sensordata_add_entry(Ninux__Sensordata *Sensordata, Ninux__Myset *set, char* key, int value);
 
