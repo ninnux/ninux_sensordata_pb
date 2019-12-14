@@ -84,6 +84,7 @@ int sensordata_serialize2_size(Ninux__Sensordata *Sensordata,unsigned char **buf
   *size = ninux__sensordata__get_packed_size (Sensordata); // This is the calculated packing length
   printf("Serialize: Writing %d serialized bytes\n",*size); // See the length of message
   ninux__sensordata__pack (Sensordata, buf);             // Pack msg, including submessages
+  sensordata_free(Sensordata);
   return 0;
 }
 
