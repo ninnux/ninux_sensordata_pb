@@ -101,6 +101,7 @@ int sensordata_deserialize(Ninux__Sensordata **sensordata, uint8_t *buf){
 
 int sensordata_deserialize2_size(Ninux__Sensordata **sensordata, uint8_t *buf, int* size){
   *sensordata = ninux__sensordata__unpack(NULL,*size,(uint8_t *)buf);
+  //ninux__sensordata__free_unpacked(*sensordata,NULL);
   return 0;
 }
 
@@ -134,6 +135,7 @@ int sensordata_print_all2(unsigned char** buffer,int* size){
   Ninux__Sensordata **psensordata2 = &sensordata2;
   sensordata_deserialize2_size(psensordata2, buffer,size);
   sensordata_print_all(sensordata2);
+  free(sensordata2);
   return 0;
 }
 
@@ -146,7 +148,7 @@ int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys
   printf("deserializzo %d bytes\n",*size);
   //sensordata2=ninux__sensordata__unpack(NULL,*size,buffer);/// FUNZIONA
   sensordata_deserialize2_size(psensordata2, buffer,size);
-  printf("size:%d\n",*size);
+  //printf("size:%d\n",*size);
   Ninux__Myset *set3;
   set3= malloc (sizeof (Ninux__Myset)); //one insert at once
   sensordata_add_set(sensordata2,set3,timestamp);
@@ -155,8 +157,10 @@ int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys
   	sensordata_add_entry(sensordata2,set3,keys[i],values[i]);
   }
   //sensordata_print_all(sensordata2);
-  printf("size buf:%d\n",*size);
+  //printf("size buf:%d\n",*size);
   sensordata_serialize2_size(sensordata2, buffer,size);
+  free(sensordata2);
+  //free(set3);
   /////////////
   return 0;
 }
