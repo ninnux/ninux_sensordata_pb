@@ -81,9 +81,12 @@ int sensordata_serialize2(Ninux__Sensordata *Sensordata,unsigned char **buf){
   return 0;
 }
 int sensordata_serialize2_size(Ninux__Sensordata *Sensordata,unsigned char **buf,int* size){
-  *size = ninux__sensordata__get_packed_size (Sensordata); // This is the calculated packing length
-  printf("Serialize: Writing %d serialized bytes\n",*size); // See the length of message
-  ninux__sensordata__pack (Sensordata, buf);             // Pack msg, including submessages
+  *size = ninux__sensordata__get_packed_size (Sensordata);
+  printf("Serialize: Writing %d serialized bytes\n",*size);
+  *buf = realloc(*buf, *size + 1);
+  if (*buf == NULL) return -1;
+  memset(*buf, 0, *size + 1);
+  ninux__sensordata__pack (Sensordata, *buf);
   sensordata_free(Sensordata);
   return 0;
 }
@@ -99,9 +102,8 @@ int sensordata_deserialize(Ninux__Sensordata **sensordata, uint8_t *buf){
   return 0;
 }
 
-int sensordata_deserialize2_size(Ninux__Sensordata **sensordata, uint8_t *buf, int* size){
-  *sensordata = ninux__sensordata__unpack(NULL,*size,(uint8_t *)buf);
-  //ninux__sensordata__free_unpacked(*sensordata,NULL);
+int sensordata_deserialize2_size(Ninux__Sensordata **sensordata, unsigned char **buf, int* size){
+  *sensordata = ninux__sensordata__unpack(NULL, *size, (uint8_t *)(*buf));
   return 0;
 }
 
@@ -122,7 +124,7 @@ int sensordata_print_all(Ninux__Sensordata *Sensordata){
   int i,k;
   for(i=0;i<Sensordata->n_sets;i++){
 	for(k=0;k<Sensordata->sets[i]->n_entries;k++){
- 	 	printf("t:%d %s %d\n",Sensordata->sets[i]->timestamp,Sensordata->sets[i]->entries[k]->key,Sensordata->sets[i]->entries[k]->value);
+ 	 	printf("t:%d %s %d\n",(int)Sensordata->sets[i]->timestamp,Sensordata->sets[i]->entries[k]->key,(int)Sensordata->sets[i]->entries[k]->value);
 	}
   }
   return 0;
@@ -164,3 +166,4 @@ int sensordata_insert_values2(unsigned char** buffer, int timestamp, char** keys
   /////////////
   return 0;
 }
+

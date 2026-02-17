@@ -1,0 +1,12 @@
+idf_component_register(
+    SRCS
+        "ninux_sensordata_pb.c"
+        "sensordata.pb-c.c"
+    INCLUDE_DIRS
+        "."
+        "include"
+    REQUIRES
+        protobuf-c
+    PRIV_REQUIRES
+	esp_https_ota
+)
